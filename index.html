@@ -3,53 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web-based course teaching HTML, CSS, and JavaScript with accessibility features.">
-    <title>Insight - Cyberpunk Course</title>
-    <!-- Linking the CSS file -->
+    <meta name="description" content="Accessible website for reading content aloud.">
+    <title>Accessible Content Reader</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="matrix-canvas"></canvas>
-
-    <header>
-        <h1>Insight - HTML, CSS, and JavaScript Course</h1>
-    </header>
-    
-    <!-- Collapsible Section for Accessibility Standards -->
-    <section class="collapsible">
-        <h2 class="collapsible-heading">Website Accessibility Standards (AA Rating)</h2>
-        <div class="content collapsible-content">
-            <p>This website follows the 13 key accessibility guidelines for achieving a WCAG AA rating:</p>
-            <ul>
-                <li>Provide text alternatives for non-text content (like alt text for images).</li>
-                <li>Ensure adaptable content that works across devices.</li>
-                <li>Provide alternatives for time-based media (e.g., captions for audio).</li>
-                <li>Make content easy to see and hear, with adjustable contrast and volume controls.</li>
-            </ul>
-        </div>
-    </section>
-    
-    <!-- Audio Section -->
-    <section class="question-section">
-        <h2>Listen to the Full Course in Audio</h2>
-        <audio controls>
-            <source src="combined_audio.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </section>
-    
-    <!-- Avatar Icons -->
-    <div id="avatars">
-        <img id="python-avatar" src="assets/avatars/python-icon.png" alt="Python" title="Python" class="avatar">
-        <img id="panda-avatar" src="assets/avatars/panda-icon.png" alt="Panda" title="Panda" class="avatar">
-        <img id="dolphin-avatar" src="assets/avatars/dolphin-icon.png" alt="Dolphin" title="Dolphin" class="avatar">
-        <img id="llama-avatar" src="assets/avatars/llama-icon.png" alt="Llama" title="Llama" class="avatar">
-        <img id="alpaca-avatar" src="assets/avatars/alpaca-icon.png" alt="Alpaca" title="Alpaca" class="avatar">
+    <div class="media-player">
+        <h1 id="content-title">Content Reader</h1>
+        <button id="play-button" aria-label="Play content">▶️ Play</button>
+        <button id="pause-button" aria-label="Pause content">⏸ Pause</button>
+        <button id="stop-button" aria-label="Stop content">⏹ Stop</button>
     </div>
 
-    <!-- Scripts -->
-    <script type="module" src="script.js"></script>
-    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <div id="content" tabindex="0">
+        <p>
+            Welcome to our accessible website. This content will be read aloud by our virtual narrator.
+            Feel free to navigate using the keyboard or screen reader, and press the play button above to listen to the content.
+        </p>
+        <!-- You can add more content here -->
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
