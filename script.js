@@ -1,59 +1,51 @@
-// Matrix Rain Effect using Babylon.js
-window.addEventListener('DOMContentLoaded', function () {
-    const canvas = document.getElementById('matrix-canvas');
-    const engine = new BABYLON.Engine(canvas, true);
+const content = document.querySelector('#content');
+const playButton = document.getElementById('play-button');
+const pauseButton = document.getElementById('pause-button');
+const stopButton = document.getElementById('stop-button');
+let utterance;
+let isPlaying = false;
 
-    const createScene = function () {
-        const scene = new BABYLON.Scene(engine);
-        const camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
-        camera.setTarget(BABYLON.Vector3.Zero());
+// Initialize speech synthesis
+function initSpeech() {
+    if (!utterance) {
+        utterance = new SpeechSynthesisUtterance(content.innerText);
+        utterance.rate = 1;  // Normal speed
+        utterance.pitch = 1.2;  // Higher pitch for youthful sound
+        utterance.voice = speechSynthesis.getVoices().find(voice => voice.name.includes('Google UK English Female') || voice.name.includes('Google US English'));
+    }
+}
 
-        // Matrix rain logic (customizable to your liking)
-        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
-        const columns = canvas.width / 20;
-        let drops = [];
+function playContent() {
+    initSpeech();
+    if (!isPlaying) {
+        speechSynthesis.speak(utterance);
+        isPlaying = true;
+    } else {
+        speechSynthesis.resume();
+    }
+}
 
-        for (let x = 0; x < columns; x++) drops[x] = 1;
+function pauseContent() {
+    speechSynthesis.pause();
+}
 
-        function draw() {
-            canvas.getContext('2d').fillStyle = "rgba(0, 0, 0, 0.05)";
-            canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height);
+function stopContent() {
+    speechSynthesis.cancel();
+    isPlaying = false;
+}
 
-            canvas.getContext('2d').fillStyle = "#00FF00";
-            canvas.getContext('2d').font = "15px monospace";
+playButton.addEventListener('click', playContent);
+pauseButton.addEventListener('click', pauseContent);
+stopButton.addEventListener('click', stopContent);
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = matrix[Math.floor(Math.random() * matrix.length)];
-                canvas.getContext('2d').fillText(text, i * 20, drops[i] * 20);
-
-                if (drops[i] * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-
-        setInterval(draw, 33);
-    };
-
-    const scene = createScene();
-    engine.runRenderLoop(function () {
-        scene.render();
-    });
-
-    window.addEventListener('resize', function () {
-        engine.resize();
-    });
+// Reinitialize utterance on speech end to allow replay
+utterance?.addEventListener('end', () => {
+    isPlaying = false;
 });
 
-// Collapsible Section Toggle with Smooth Animation
-document.querySelectorAll('.collapsible-heading').forEach(function (heading) {
-    heading.addEventListener('click', function () {
-        const content = this.nextElementSibling;
-        if (content.style.display === 'block') {
-            content.style.maxHeight = null;
-            content.style.display = 'none';
-        } else {
-            content.style.display = 'block';
-            content.style.maxHeight = content.scrollHeight + 'px';
-        }
-    });
+// Accessibility: Provide keyboard navigation support
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        playContent();
+    }
 });
