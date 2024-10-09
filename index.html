@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web-based course teaching HTML, CSS, and JavaScript with accessibility features.">
     <title>Insight - Cyberpunk Course</title>
-    <!-- Since styles.css is in the same directory, no need for a folder path -->
+    <!-- Linking the CSS file -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,9 +15,10 @@
         <h1>Insight - HTML, CSS, and JavaScript Course</h1>
     </header>
     
+    <!-- Collapsible Section for Accessibility Standards -->
     <section class="collapsible">
-        <h2>Website Accessibility Standards (AA Rating)</h2>
-        <div class="content">
+        <h2 class="collapsible-heading">Website Accessibility Standards (AA Rating)</h2>
+        <div class="content collapsible-content">
             <p>This website follows the 13 key accessibility guidelines for achieving a WCAG AA rating:</p>
             <ul>
                 <li>Provide text alternatives for non-text content (like alt text for images).</li>
@@ -28,6 +29,7 @@
         </div>
     </section>
     
+    <!-- Audio Section -->
     <section class="question-section">
         <h2>Listen to the Full Course in Audio</h2>
         <audio controls>
@@ -36,15 +38,16 @@
         </audio>
     </section>
     
+    <!-- Avatar Icons -->
     <div id="avatars">
-        <img id="python-avatar" src="assets/avatars/python-icon.png" alt="Python" title="Python">
-        <img id="panda-avatar" src="assets/avatars/panda-icon.png" alt="Panda" title="Panda">
-        <img id="dolphin-avatar" src="assets/avatars/dolphin-icon.png" alt="Dolphin" title="Dolphin">
-        <img id="llama-avatar" src="assets/avatars/llama-icon.png" alt="Llama" title="Llama">
-        <img id="alpaca-avatar" src="assets/avatars/alpaca-icon.png" alt="Alpaca" title="Alpaca">
+        <img id="python-avatar" src="assets/avatars/python-icon.png" alt="Python" title="Python" class="avatar">
+        <img id="panda-avatar" src="assets/avatars/panda-icon.png" alt="Panda" title="Panda" class="avatar">
+        <img id="dolphin-avatar" src="assets/avatars/dolphin-icon.png" alt="Dolphin" title="Dolphin" class="avatar">
+        <img id="llama-avatar" src="assets/avatars/llama-icon.png" alt="Llama" title="Llama" class="avatar">
+        <img id="alpaca-avatar" src="assets/avatars/alpaca-icon.png" alt="Alpaca" title="Alpaca" class="avatar">
     </div>
 
-    <!-- Correct path to script.js since it's in the same directory -->
+    <!-- Scripts -->
     <script type="module" src="script.js"></script>
 </body>
 </html>

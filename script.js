@@ -1,62 +1,59 @@
-import * as BABYLON from 'https://cdn.babylonjs.com/babylon.js';
+// Matrix Rain Effect using Babylon.js
+window.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('matrix-canvas');
+    const engine = new BABYLON.Engine(canvas, true);
 
-// BabylonJS Matrix Rain Effect
-const canvas = document.getElementById('matrix-canvas');
-const engine = new BABYLON.Engine(canvas, true);
+    const createScene = function () {
+        const scene = new BABYLON.Scene(engine);
+        const camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
+        camera.setTarget(BABYLON.Vector3.Zero());
 
-const createScene = function () {
-    const scene = new BABYLON.Scene(engine);
+        // Matrix rain logic (customizable to your liking)
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+        const columns = canvas.width / 20;
+        let drops = [];
 
-    const camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2, 10, BABYLON.Vector3.Zero(), scene);
-    camera.attachControl(canvas, true);
+        for (let x = 0; x < columns; x++) drops[x] = 1;
 
-    const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+        function draw() {
+            canvas.getContext('2d').fillStyle = "rgba(0, 0, 0, 0.05)";
+            canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height);
 
-    // Matrix Rain Effect
-    const matrixTexture = new BABYLON.DynamicTexture("dynamic texture", { width: 512, height: 512 }, scene, false);
-    matrixTexture.hasAlpha = true;
-    const matrixMaterial = new BABYLON.StandardMaterial("mat", scene);
-    matrixMaterial.diffuseTexture = matrixTexture;
-    matrixMaterial.opacityTexture = matrixTexture;
+            canvas.getContext('2d').fillStyle = "#00FF00";
+            canvas.getContext('2d').font = "15px monospace";
 
-    const matrixPlane = BABYLON.MeshBuilder.CreatePlane("matrixPlane", { height: 30, width: 15 }, scene);
-    matrixPlane.position.z = 0;
-    matrixPlane.position.y = 5;
-    matrixPlane.material = matrixMaterial;
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrix[Math.floor(Math.random() * matrix.length)];
+                canvas.getContext('2d').fillText(text, i * 20, drops[i] * 20);
 
-    // Animate Matrix Rain
-    let textPosY = 0;
-    scene.registerBeforeRender(function () {
-        const ctx = matrixTexture.getContext();
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, 512, 512);
-        ctx.fillStyle = "lime";
-        ctx.font = "20px Courier";
-        for (let i = 0; i < 512; i += 20) {
-            const char = String.fromCharCode(0x30A0 + Math.random() * 96);
-            ctx.fillText(char, i, textPosY);
+                if (drops[i] * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
         }
-        textPosY = (textPosY + 10) % 512;
-        matrixTexture.update();
+
+        setInterval(draw, 33);
+    };
+
+    const scene = createScene();
+    engine.runRenderLoop(function () {
+        scene.render();
     });
 
-    return scene;
-};
-
-const scene = createScene();
-engine.runRenderLoop(() => {
-    scene.render();
+    window.addEventListener('resize', function () {
+        engine.resize();
+    });
 });
 
-window.addEventListener('resize', () => {
-    engine.resize();
-});
-
-// Collapsible Sections Toggle
-const collapsibles = document.querySelectorAll('.collapsible h2');
-collapsibles.forEach(collapsible => {
-    collapsible.addEventListener('click', function() {
+// Collapsible Section Toggle with Smooth Animation
+document.querySelectorAll('.collapsible-heading').forEach(function (heading) {
+    heading.addEventListener('click', function () {
         const content = this.nextElementSibling;
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        if (content.style.display === 'block') {
+            content.style.maxHeight = null;
+            content.style.display = 'none';
+        } else {
+            content.style.display = 'block';
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
     });
 });
