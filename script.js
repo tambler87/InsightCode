@@ -1,4 +1,3 @@
-const correctAnswer = "HTML is the structure, CSS styles it, and JavaScript makes it interactive.";
 const submitButton = document.getElementById('submit-answer');
 const answerInput = document.getElementById('answer-input');
 const feedback = document.getElementById('feedback');

@@ -5,7 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web-based course teaching HTML, CSS, and JavaScript with accessibility features.">
     <title>NeoRabbit - Cyberpunk Course</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000000;
+            color: #c0c0c0;
+            overflow: hidden;
+            position: relative;
+        }
+        #matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: -1;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #00ffff;
+            text-shadow: 2px 2px 8px #00ffff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #ffffff;
+            background-color: #333;
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #00ffff;
+            color: #000000;
+        }
+        .collapsible {
+            margin: 20px 0;
+        }
+        .collapsible h2 {
+            cursor: pointer;
+            font-size: 1.8em;
+            color: #c0c0c0;
+            text-shadow: 1px 1px 5px #00ffff;
+        }
+        .collapsible .content {
+            display: none;
+            padding: 10px 0;
+            color: #ffffff;
+        }
+        .dark-mode {
+            background-color: #1c1c1c;
+            color: #00ffff;
+        }
+        .question-section {
+            margin: 20px 0;
+            color: #c0c0c0;
+        }
+        .question-section input {
+            padding: 10px;
+            font-size: 1.2em;
+            width: 80%;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: #ffffff;
+            border: 2px solid #00ffff;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div id="matrix-rain"></div>
@@ -40,6 +109,35 @@
         <p id="feedback" class="hidden"></p>
     </section>
 
-    <script src="script.js"></script>
+    <script>
+        const correctAnswer = "HTML is the structure, CSS styles it, and JavaScript makes it interactive.";
+        const submitButton = document.getElementById('submit-answer');
+        const answerInput = document.getElementById('answer-input');
+        const feedback = document.getElementById('feedback');
+        const avatarSection = document.getElementById('avatar-section');
+
+        submitButton.addEventListener('click', function() {
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            if (userAnswer.includes("html") && userAnswer.includes("structure") && 
+                userAnswer.includes("css") && userAnswer.includes("styles") && 
+                userAnswer.includes("javascript") && userAnswer.includes("interactive")) {
+                feedback.textContent = "Correct! Welcome to the next stage.";
+                feedback.style.color = "#00ff00";
+            } else {
+                feedback.textContent = "Incorrect, try again.";
+                feedback.style.color = "#ff0000";
+            }
+            feedback.classList.remove('hidden');
+        });
+
+        // Collapsible sections
+        const collapsibles = document.querySelectorAll('.collapsible h2');
+        collapsibles.forEach(collapsible => {
+            collapsible.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
 </body>
 </html>
