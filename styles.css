@@ -1,51 +1,39 @@
-const content = document.querySelector('#content');
-const playButton = document.getElementById('play-button');
-const pauseButton = document.getElementById('pause-button');
-const stopButton = document.getElementById('stop-button');
-let utterance;
-let isPlaying = false;
-
-// Initialize speech synthesis
-function initSpeech() {
-    if (!utterance) {
-        utterance = new SpeechSynthesisUtterance(content.innerText);
-        utterance.rate = 1;  // Normal speed
-        utterance.pitch = 1.2;  // Higher pitch for youthful sound
-        utterance.voice = speechSynthesis.getVoices().find(voice => voice.name.includes('Google UK English Female') || voice.name.includes('Google US English'));
-    }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
 }
 
-function playContent() {
-    initSpeech();
-    if (!isPlaying) {
-        speechSynthesis.speak(utterance);
-        isPlaying = true;
-    } else {
-        speechSynthesis.resume();
-    }
+.media-player {
+    background-color: #444;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-function pauseContent() {
-    speechSynthesis.pause();
+.media-player button {
+    background: #008cba;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-function stopContent() {
-    speechSynthesis.cancel();
-    isPlaying = false;
+#content {
+    margin-top: 20px;
+    font-size: 18px;
 }
 
-playButton.addEventListener('click', playContent);
-pauseButton.addEventListener('click', pauseContent);
-stopButton.addEventListener('click', stopContent);
+h2 {
+    color: #005f99;
+}
 
-// Reinitialize utterance on speech end to allow replay
-utterance?.addEventListener('end', () => {
-    isPlaying = false;
-});
-
-// Accessibility: Provide keyboard navigation support
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        playContent();
-    }
-});
+ul {
+    margin-left: 20px;
+}
