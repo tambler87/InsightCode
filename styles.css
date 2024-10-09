@@ -1,49 +1,51 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+const content = document.querySelector('#content');
+const playButton = document.getElementById('play-button');
+const pauseButton = document.getElementById('pause-button');
+const stopButton = document.getElementById('stop-button');
+let utterance;
+let isPlaying = false;
+
+// Initialize speech synthesis
+function initSpeech() {
+    if (!utterance) {
+        utterance = new SpeechSynthesisUtterance(content.innerText);
+        utterance.rate = 1;  // Normal speed
+        utterance.pitch = 1.2;  // Higher pitch for youthful sound
+        utterance.voice = speechSynthesis.getVoices().find(voice => voice.name.includes('Google UK English Female') || voice.name.includes('Google US English'));
+    }
 }
 
-.media-player {
-    background-color: #444;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+function playContent() {
+    initSpeech();
+    if (!isPlaying) {
+        speechSynthesis.speak(utterance);
+        isPlaying = true;
+    } else {
+        speechSynthesis.resume();
+    }
 }
 
-.media-player button {
-    background: #008cba;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
-    cursor: pointer;
+function pauseContent() {
+    speechSynthesis.pause();
 }
 
-.media-player button:hover {
-    background: #005f5f;
+function stopContent() {
+    speechSynthesis.cancel();
+    isPlaying = false;
 }
 
-#content {
-    padding: 20px;
-    font-size: 18px;
-    line-height: 1.6;
-}
+playButton.addEventListener('click', playContent);
+pauseButton.addEventListener('click', pauseContent);
+stopButton.addEventListener('click', stopContent);
 
-#content:focus {
-    outline: 2px solid #000;
-}
+// Reinitialize utterance on speech end to allow replay
+utterance?.addEventListener('end', () => {
+    isPlaying = false;
+});
 
-button:focus {
-    outline: 3px solid yellow;
-}
-
-h1, p {
-    margin: 10px 0;
-}
+// Accessibility: Provide keyboard navigation support
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        playContent();
+    }
+});
