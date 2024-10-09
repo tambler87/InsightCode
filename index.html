@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web-based course teaching HTML, CSS, and JavaScript with accessibility features.">
     <title>Insight - Cyberpunk Course</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Since styles.css is in the same directory, no need for a folder path -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <canvas id="matrix-canvas"></canvas>
+
     <header>
         <h1>Insight - HTML, CSS, and JavaScript Course</h1>
     </header>
     
-    <!-- Accessibility Section -->
     <section class="collapsible">
         <h2>Website Accessibility Standards (AA Rating)</h2>
         <div class="content">
@@ -27,16 +28,6 @@
         </div>
     </section>
     
-    <!-- Course Syllabus -->
-    <section class="collapsible">
-        <h2>Syllabus</h2>
-        <div class="content">
-            <p>Syllabus for Learning HTML, CSS, and JavaScript</p>
-            <p>Objective: Teach the basics of HTML, CSS, and JavaScript through analogies, simple code examples, and hands-on activities, with a focus on making the content accessible and engaging for all learners.</p>
-        </div>
-    </section>
-
-    <!-- Audio Section -->
     <section class="question-section">
         <h2>Listen to the Full Course in Audio</h2>
         <audio controls>
@@ -45,7 +36,6 @@
         </audio>
     </section>
     
-    <!-- Avatars Section -->
     <div id="avatars">
         <img id="python-avatar" src="assets/avatars/python-icon.png" alt="Python" title="Python">
         <img id="panda-avatar" src="assets/avatars/panda-icon.png" alt="Panda" title="Panda">
@@ -54,6 +44,7 @@
         <img id="alpaca-avatar" src="assets/avatars/alpaca-icon.png" alt="Alpaca" title="Alpaca">
     </div>
 
-    <script type="module" src="scripts.js"></script>
+    <!-- Correct path to script.js since it's in the same directory -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>

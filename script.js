@@ -10,6 +10,7 @@ const createScene = function () {
     const camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 2, 10, BABYLON.Vector3.Zero(), scene);
     camera.attachControl(canvas, true);
 
+    const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 
     // Matrix Rain Effect
     const matrixTexture = new BABYLON.DynamicTexture("dynamic texture", { width: 512, height: 512 }, scene, false);
@@ -51,7 +52,7 @@ window.addEventListener('resize', () => {
     engine.resize();
 });
 
-// Collapsible Sections
+// Collapsible Sections Toggle
 const collapsibles = document.querySelectorAll('.collapsible h2');
 collapsibles.forEach(collapsible => {
     collapsible.addEventListener('click', function() {
