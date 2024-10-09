@@ -1,58 +1,49 @@
-/* styles.css */
 body {
-    background-color: #222;
-    color: #00ff00;
-    font-family: "Courier New", Courier, monospace;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-h1, h2 {
-    color: cyan;
-    text-align: center;
-}
-
-.collapsible {
+.media-player {
+    background-color: #444;
+    color: white;
     padding: 20px;
-}
-
-.collapsible-heading {
-    padding: 10px;
-    border: 1px solid green;
-    cursor: pointer;
-}
-
-.collapsible-content {
-    display: none;
-    padding: 10px;
-    border: 1px solid green;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
-
-.collapsible-content p, .collapsible-content ul {
-    margin: 0;
-}
-
-.avatar {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    margin: 10px;
-}
-
-#avatars {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-#matrix-canvas {
-    position: fixed;
+    text-align: center;
+    position: sticky;
     top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
+    z-index: 100;
+}
+
+.media-player button {
+    background: #008cba;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.media-player button:hover {
+    background: #005f5f;
+}
+
+#content {
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+#content:focus {
+    outline: 2px solid #000;
+}
+
+button:focus {
+    outline: 3px solid yellow;
+}
+
+h1, p {
+    margin: 10px 0;
 }
