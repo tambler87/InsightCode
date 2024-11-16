@@ -3,106 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Accessible syllabus for learning HTML, CSS, and JavaScript">
-    <title>Web Development Syllabus</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <title>Interactive Coding Teacher</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="media-player">
-        <h1 id="content-title">Web Development Syllabus</h1>
-        <button id="play-button" aria-label="Play syllabus">▶️ Play</button>
-        <button id="pause-button" aria-label="Pause narration">⏸ Pause</button>
-        <button id="stop-button" aria-label="Stop narration">⏹ Stop</button>
-    </div>
+    <header>
+        <h1>Interactive Coding Teacher</h1>
+        <button id="toggleContrast">Toggle High Contrast</button>
+    </header>
 
-    <div id="content" tabindex="0">
-        <h2>Week 1: Introduction to HTML, CSS, and JavaScript</h2>
-        <p><strong>Objective</strong>: Explain how each language works in building a webpage using a house analogy to make it relatable.</p>
-        <ul>
-            <li><strong>HTML</strong>: The structure of a house (foundation and walls).</li>
-            <li><strong>CSS</strong>: The decoration (paint, furniture, and layout).</li>
-            <li><strong>JavaScript</strong>: The functionality (electricity and plumbing, making the house work and respond to actions).</li>
-        </ul>
-        <h3>Session Plan</h3>
-        <ul>
-            <li><strong>Talking Time (5-7 minutes)</strong>: Discuss how HTML forms the walls and foundation, CSS styles the house, and JavaScript makes it interactive.</li>
-            <li>Use simple examples like building a house to explain the role of each language.</li>
-        </ul>
-        <h3>Activity Time (7-8 minutes)</h3>
-        <ul>
-            <li>Create a basic webpage using HTML, adding headings and paragraphs.</li>
-        </ul>
+    <main>
+        <!-- Chat Interface -->
+        <section id="chat-section">
+            <h2>Ask Your Teacher</h2>
+            <div id="chat-window">
+                <div id="chat-messages"></div>
+                <input id="chat-input" type="text" placeholder="Ask me anything about coding..." />
+                <button id="send-button">Send</button>
+            </div>
+        </section>
 
-        <h2>Week 2: Understanding HTML – The Blueprint of a Webpage</h2>
-        <p><strong>Objective</strong>: Understand how HTML organizes content like the blueprint of a house.</p>
-        <p>HTML is the blueprint that lays out where everything goes on a webpage. Tags define different parts, like <code>&lt;h1&gt;</code> for titles and <code>&lt;p&gt;</code> for paragraphs.</p>
-        <h3>Session Plan</h3>
-        <ul>
-            <li><strong>Talking Time (5-7 minutes)</strong>: Explain that HTML tags structure the page but are not visible, just like blueprints aren’t visible in the final building.</li>
-            <li>Discuss the use of angle brackets <code>&lt;&gt;</code> to enclose tags.</li>
-        </ul>
-        <h3>Activity Time (7-8 minutes)</h3>
-        <ul>
-            <li>Create a simple HTML page with headings and paragraphs.</li>
-        </ul>
+        <!-- Interactive Lessons -->
+        <section id="lesson-section">
+            <h2>Interactive Lesson: Basics of HTML</h2>
+            <div id="lesson-content">
+                <p id="lesson-instruction">HTML stands for HyperText Markup Language...</p>
+                <textarea id="lesson-editor"></textarea>
+                <button id="run-code">Run Code</button>
+            </div>
+            <iframe id="lesson-output"></iframe>
+        </section>
 
-        <h2>Week 3: Introduction to CSS – Decorating Your Webpage</h2>
-        <p><strong>Objective</strong>: Add styles to the HTML page from Week 2 using CSS.</p>
-        <p>CSS changes how the webpage looks, like painting a house and arranging furniture. Selectors target elements to style, properties define what to change (e.g., color), and values specify the details (e.g., red).</p>
-        <h3>Session Plan</h3>
-        <ul>
-            <li><strong>Talking Time (5-7 minutes)</strong>: Explain how CSS can change colors, fonts, and layouts without altering the structure.</li>
-            <li>Discuss CSS syntax: selectors, properties, and values.</li>
-        </ul>
-        <h3>Activity Time (7-8 minutes)</h3>
-        <ul>
-            <li>Add CSS styling to the HTML page from Week 2, changing colors and fonts.</li>
-        </ul>
+        <!-- Quiz Section -->
+        <section id="quiz-section">
+            <h2>Take a Quiz</h2>
+            <form id="quiz-form">
+                <div class="quiz-question">
+                    <p>What does HTML stand for?</p>
+                    <input type="radio" name="q1" value="1" /> HyperText Machine Language<br />
+                    <input type="radio" name="q1" value="2" /> HyperText Markup Language<br />
+                    <input type="radio" name="q1" value="3" /> HyperText Modeling Language<br />
+                </div>
+                <button id="submit-quiz">Submit Quiz</button>
+            </form>
+        </section>
+    </main>
 
-        <h2>Week 4: JavaScript – Bringing Your Webpage to Life</h2>
-        <p><strong>Objective</strong>: Introduce JavaScript to make the webpage interactive.</p>
-        <p>JavaScript makes a webpage interactive, like adding switches or controls to a house.</p>
-        <h3>Session Plan</h3>
-        <ul>
-            <li><strong>Talking Time (5-7 minutes)</strong>: Explain how JavaScript allows users to interact with a webpage by responding to actions (e.g., clicking a button).</li>
-            <li>Discuss how events trigger JavaScript functions.</li>
-        </ul>
-        <h3>Activity Time (7-8 minutes)</h3>
-        <ul>
-            <li>Add a button that triggers an alert when clicked.</li>
-        </ul>
+    <footer>
+        <p>End of Course | Happy Coding!</p>
+    </footer>
 
-        <h2>Week 5: Combining HTML, CSS, and JavaScript</h2>
-        <p><strong>Objective</strong>: Create a complete interactive webpage using all three languages.</p>
-        <p>HTML forms the structure, CSS adds design, and JavaScript brings the webpage to life with interaction.</p>
-        <h3>Session Plan</h3>
-        <ul>
-            <li><strong>Talking Time (5-7 minutes)</strong>: Review how HTML, CSS, and JavaScript work together to create a functional webpage.</li>
-            <li>Demonstrate a simple project that uses all three.</li>
-        </ul>
-        <h3>Activity Time (7-8 minutes)</h3>
-        <ul>
-            <li>Create a webpage with HTML for structure, CSS for style, and JavaScript for interaction.</li>
-        </ul>
-
-        <h2>Final Notes on Simplifying Syntax</h2>
-        <p><strong>Explanation</strong>: Tags define the structure of the webpage and are wrapped in angle brackets <code>&lt;&gt;</code>. Attributes provide additional instructions to modify elements, like changing color.</p>
-        <p>Use the <code>style="color:red;"</code> attribute within a <code>&lt;p&gt;</code> tag to make the text appear in red.</p>
-
-        <h2>Key HTML Tags</h2>
-        <ul>
-            <li><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>: Headings for titles and subheadings.</li>
-            <li><code>&lt;p&gt;</code>: Paragraphs for text.</li>
-            <li><code>&lt;a href=""&gt;</code>: Links to other pages.</li>
-            <li><code>&lt;img src=""&gt;</code>: Images.</li>
-            <li><code>&lt;div&gt;</code>: Divisions for grouping content.</li>
-            <li><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>: Lists for bullet points or numbered lists.</li>
-            <li><code>&lt;form&gt;</code>: Forms to collect input.</li>
-            <li><code>&lt;button&gt;</code>: Buttons to trigger actions.</li>
-        </ul>
-
-    </div>
-
-    <script src="script.js"></script> <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
