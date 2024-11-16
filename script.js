@@ -1,74 +1,38 @@
-const playButton = document.getElementById('play-button');
-const pauseButton = document.getElementById('pause-button');
-const stopButton = document.getElementById('stop-button');
-let utterance;
-let isPlaying = false;
-let voicesLoaded = false;
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+const sendButton = document.getElementById('send-button');
 
-// Function to initialize the speech synthesis with the content
-function initSpeech() {
-    const contentText = document.querySelector('#content').innerText; // Get content text
-    console.log("Initializing speech synthesis...");
-    
-    utterance = new SpeechSynthesisUtterance(contentText);
-    utterance.rate = 1; // Normal speaking rate
-    utterance.pitch = 1.2; // Slightly higher pitch for a youthful voice
+sendButton.addEventListener('click', () => {
+    const userMessage = chatInput.value.trim();
+    if (userMessage) {
+        // Add user message to chat
+        const userBubble = document.createElement('div');
+        userBubble.className = 'chat-bubble user';
+        userBubble.textContent = userMessage;
+        chatMessages.appendChild(userBubble);
 
-    // Ensure voices are loaded and pick a voice
-    const voices = speechSynthesis.getVoices();
-    console.log("Available voices:", voices);
-    
-    if (voices.length > 0) {
-        // Pick a female English voice (Google or any available)
-        utterance.voice = voices.find(voice => voice.name.includes('Google UK English Female') || voice.name.includes('Google US English'));
-        voicesLoaded = true;
-        console.log("Voice selected:", utterance.voice);
+        // Scroll to the bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Generate AI response
+        setTimeout(() => {
+            const aiBubble = document.createElement('div');
+            aiBubble.className = 'chat-bubble ai';
+            aiBubble.textContent = generateAIResponse(userMessage);
+            chatMessages.appendChild(aiBubble);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+
+        chatInput.value = '';
+    }
+});
+
+function generateAIResponse(message) {
+    if (message.toLowerCase().includes('html')) {
+        return "HTML stands for HyperText Markup Language. It's used to structure web pages.";
+    } else if (message.toLowerCase().includes('css')) {
+        return "CSS stands for Cascading Style Sheets. It styles your web page!";
     } else {
-        console.log("No voices available yet. Waiting for voices to load...");
-    }
-
-    utterance.onend = function() {
-        isPlaying = false;
-        console.log("Narration finished.");
-    };
-}
-
-// Wait for voices to load and then initialize speech
-speechSynthesis.onvoiceschanged = () => {
-    if (!voicesLoaded) {
-        console.log("Voices changed, reinitializing speech...");
-        initSpeech();
-    }
-};
-
-function playContent() {
-    if (!utterance || !voicesLoaded) {
-        console.log("No utterance or voices not loaded, initializing...");
-        initSpeech();
-    }
-
-    if (!isPlaying) {
-        speechSynthesis.speak(utterance);
-        isPlaying = true;
-        console.log("Playing narration...");
-    } else {
-        speechSynthesis.resume();
-        console.log("Resuming narration...");
+        return "That's an interesting question! Let me think...";
     }
 }
-
-function pauseContent() {
-    speechSynthesis.pause();
-    console.log("Narration paused.");
-}
-
-function stopContent() {
-    speechSynthesis.cancel();
-    isPlaying = false;
-    console.log("Narration stopped.");
-}
-
-// Event listeners for buttons
-playButton.addEventListener('click', playContent);
-pauseButton.addEventListener('click', pauseContent);
-stopButton.addEventListener('click', stopContent);
