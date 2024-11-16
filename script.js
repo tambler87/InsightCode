@@ -1,3 +1,4 @@
+// Chat Functionality
 const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 const sendButton = document.getElementById('send-button');
@@ -5,16 +6,12 @@ const sendButton = document.getElementById('send-button');
 sendButton.addEventListener('click', () => {
     const userMessage = chatInput.value.trim();
     if (userMessage) {
-        // Add user message to chat
         const userBubble = document.createElement('div');
         userBubble.className = 'chat-bubble user';
         userBubble.textContent = userMessage;
         chatMessages.appendChild(userBubble);
-
-        // Scroll to the bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // Generate AI response
         setTimeout(() => {
             const aiBubble = document.createElement('div');
             aiBubble.className = 'chat-bubble ai';
@@ -36,3 +33,40 @@ function generateAIResponse(message) {
         return "That's an interesting question! Let me think...";
     }
 }
+
+// Interactive Lessons
+const lessonEditor = document.getElementById('lesson-editor');
+const runCodeButton = document.getElementById('run-code');
+const lessonOutput = document.getElementById('lesson-output');
+
+lessonEditor.value = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Webpage</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+`;
+
+runCodeButton.addEventListener('click', () => {
+    const code = lessonEditor.value;
+    lessonOutput.srcdoc = code;
+});
+
+// Quizzes
+const quizForm = document.getElementById('quiz-form');
+const quizResults = document.createElement('p');
+
+quizForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const answers = new FormData(quizForm);
+    let score = 0;
+    if (answers.get('q1') === '2') score++;
+
+    quizResults.textContent = `You scored ${score}/1!`;
+    quizForm.appendChild(quizResults);
+});
